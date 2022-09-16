@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "inputs.h"
 #include "application.h"
 
 namespace fuse
@@ -43,8 +44,15 @@ namespace fuse
       exit(EXIT_FAILURE);
     }
 
+    inputs::initialize(window);
+
     while (is_running)
     {
+      inputs::dispatch_events();
+      if (inputs::is_key(SDL_SCANCODE_A))
+      {
+        FUSE_INFO("Key 'a' pressed!");
+      }
       SDL_RenderClear(renderer);
       SDL_RenderPresent(renderer);
     }
